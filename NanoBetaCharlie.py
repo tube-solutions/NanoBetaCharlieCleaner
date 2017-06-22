@@ -28,7 +28,8 @@ class NanoBetaCharlie(object):
         this_report_date = max(cleaned_both_reports['Date']) 
         cleaned_report = cleaned_both_reports[cleaned_both_reports['Date'] == this_report_date]
 
-        return cleaned_report
+        report = self.reorder_columns(cleaned_report)
+        return report
 
 
     def create_multiindex_header(self, df):
@@ -65,4 +66,31 @@ class NanoBetaCharlie(object):
         ndf.columns = new_column_names
 
         return ndf
+
+    def reorder_columns(self, report):
+        column_order = [
+                        'Date', 
+                        'Platform', 
+                        'Views',
+                        'Views ∆',
+                        'Engagements',
+                        'Engagements ∆', 
+                        'Uploads',
+                        'Upload ∆', 
+                        'Followers_Beginning',
+                        'Followers_Gained',
+                        'Fan Health: Views',
+                        'FH: Views ∆',
+                        'Fan Health: Engagements', 
+                        'FH: Engagements ∆',
+                        'New Fan Efficiency ', 
+                        'New Fan Efficiency ∆',
+                        'Avg_V7', 
+                        'V7 ∆', 
+                        'Avg_ER7'
+                    ]
+
+        report = report[column_order]
+
+        return report
 
